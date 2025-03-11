@@ -2,6 +2,7 @@ package com.example.oop.converter;
 
 import com.example.oop.dto.MemberRequestDto;
 import com.example.oop.entity.Member;
+import com.example.oop.entity.status.MemberStatus;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -21,6 +22,7 @@ public class MemberConverter {
                 .name(signRequestDTO.getName())
                 .birthDate(birthDate.atStartOfDay())
                 .phoneNumber(signRequestDTO.getPhoneNumber())
+                .memberStatus(MemberStatus.ACTIVE)
                 .build();
     }
 }

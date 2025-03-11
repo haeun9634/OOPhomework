@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'application'
+	id 'org.openjfx.javafxplugin' version '0.0.14'
 }
 
 group = 'com.example'
@@ -11,6 +13,11 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+}
+
+javafx {
+	version = "17"
+	modules = ['javafx.controls', 'javafx.fxml']
 }
 
 configurations {
@@ -26,14 +33,34 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 	implementation 'mysql:mysql-connector-java:8.0.30'
 
+	// JavaFX 관련 의존성 추가
+	implementation 'org.openjfx:javafx-controls:17'
+	implementation 'org.openjfx:javafx-fxml:17'
+
+	// Spring Web 관련 의존성 추가
+	implementation 'org.springframework:spring-web:6.2.3'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.withType(JavaExec).configureEach {
+	jvmArgs = [
+			"--module-path", classpath.asPath,
+			"--add-modules", "javafx.controls,javafx.fxml"
+	]
+}
+
+application {
+	mainClass = 'com.example.oop.gui.MemberApp' // JavaFX 실행할 클래스
 }
