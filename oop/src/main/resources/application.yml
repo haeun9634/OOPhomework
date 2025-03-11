@@ -1,0 +1,19 @@
+spring:
+  server:
+    port: 8080
+  datasource:
+    url: jdbc:mysql://localhost:3306/oop_db?useSSL=false&serverTimezone=Asia/Seoul
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: update # 스키마 자동 업데이트
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show_sql: true
