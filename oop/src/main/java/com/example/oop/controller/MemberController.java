@@ -4,10 +4,9 @@ import com.example.oop.dto.MemberRequestDto;
 import com.example.oop.entity.Member;
 import com.example.oop.service.MemberService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/members")
@@ -18,5 +17,10 @@ public class MemberController {
     @PostMapping
     public Member addMember(@RequestBody MemberRequestDto.SignRequestDTO signRequestDTO) {
         return memberService.joinMember(signRequestDTO);
+    }
+
+    @GetMapping
+    public List<Member> getAllMembers() {
+        return memberService.getAllMembers();
     }
 }

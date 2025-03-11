@@ -6,10 +6,4 @@ import lombok.Getter;
 
 public class MemberResponseDto {
 
-    @Getter
-    @AllArgsConstructor
-    @Builder
-    public static class signinRequestDto{
-
-    }
 }
