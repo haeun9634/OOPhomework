@@ -23,4 +23,10 @@ public class MemberController {
     public List<Member> getAllMembers() {
         return memberService.getAllMembers();
     }
+
+    @GetMapping("/search")
+    public List<Member> searchMembers(@RequestParam String name) {
+        return memberService.findMembersByName(name);
+    }
+
 }

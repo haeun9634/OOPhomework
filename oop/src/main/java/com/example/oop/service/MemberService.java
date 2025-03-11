@@ -25,4 +25,8 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+    // 이름으로 회원 찾기
+    public List<Member> findMembersByName(String name) {
+        return memberRepository.findByNameContaining(name);
+    }
 }
