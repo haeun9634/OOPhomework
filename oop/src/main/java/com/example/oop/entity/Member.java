@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -21,14 +22,14 @@ public class Member extends BaseEntity{
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private Timestamp birthDate;
+    @Column(name = "birth_date", nullable = false)
+    private LocalDateTime birthDate;
 
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "member_status", nullable = false)
     private MemberStatus memberStatus;
 
 }
