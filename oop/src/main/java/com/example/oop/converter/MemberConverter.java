@@ -12,15 +12,9 @@ import java.time.LocalDate;
 public class MemberConverter {
 
     public static Member toMember(MemberRequestDto.SignRequestDTO signRequestDTO) {
-        LocalDate birthDate = LocalDate.of(
-                signRequestDTO.getBirthYear(),
-                signRequestDTO.getBirthMonth(),
-                signRequestDTO.getBirthDay()
-        );
-
         return Member.builder()
                 .name(signRequestDTO.getName())
-                .birthDate(birthDate.atStartOfDay())
+                .birthDate(signRequestDTO.getBirthDate().atStartOfDay())
                 .phoneNumber(signRequestDTO.getPhoneNumber())
                 .memberStatus(MemberStatus.ACTIVE)
                 .build();
