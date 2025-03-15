@@ -87,7 +87,14 @@ public class MemberApp extends Application {
 
         MemberRequestDto.SignRequestDTO requestDTO = new MemberRequestDto.SignRequestDTO(name, phone, birthDate);
         try {
-            Member newMember = restTemplate.postForObject(BASE_URL, requestDTO, Member.class);
+            ResponseEntity<Member> response = restTemplate.exchange(
+                    BASE_URL,
+                    HttpMethod.POST,
+                    new HttpEntity<>(requestDTO),
+                    Member.class
+            );
+            Member newMember = response.getBody();
+
             if (newMember != null) {
                 members.clear();
                 members.add(newMember);
