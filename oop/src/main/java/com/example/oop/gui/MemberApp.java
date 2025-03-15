@@ -63,6 +63,8 @@ public class MemberApp extends Application {
         nameField.setPromptText("이름 입력");
 
         DatePicker birthDateField = new DatePicker();
+        birthDateField.setPromptText("생년월일 선택");
+
         TextField phoneField = new TextField();
         phoneField.setPromptText("전화번호 입력");
 
@@ -85,9 +87,13 @@ public class MemberApp extends Application {
 
         MemberRequestDto.SignRequestDTO requestDTO = new MemberRequestDto.SignRequestDTO(name, phone, birthDate);
         try {
-            restTemplate.postForObject(BASE_URL, requestDTO, MemberRequestDto.SignRequestDTO.class);
-            showAlert("Success", "회원 추가가 완료되었습니다!");
-            loadMembers();
+            Member newMember = restTemplate.postForObject(BASE_URL, requestDTO, Member.class);
+            if (newMember != null) {
+                members.clear();
+                members.add(newMember);
+                memberTable.setItems(members);
+                showAlert("Success", "회원 추가가 완료되었습니다!");
+            }
         } catch (Exception ex) {
             showAlert("Error", "회원 추가에 실패하였습니다.");
         }
